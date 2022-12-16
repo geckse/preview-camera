@@ -90,19 +90,19 @@ enum CaptureQuality {
         // Update the orientation before taking photo.
         if let photoOutputConnection = photoOutput.connection(with: .video){
             photoOutputConnection.videoOrientation = videoOrientation()
-        }
-
-        // mirror the front camera output (so it matches the preview)
-        if photoOutputConnection.isVideoMirroringSupported == true 
-            && videoDeviceInput.device.position == .front
-            && self.settings.mirrorFrontCameraResult == true {
-            photoOutputConnection.automaticallyAdjustsVideoMirroring = false
-            if videoDeviceInput.device.position == .front {
-                photoOutputConnection.isVideoMirrored = true
+            
+            // mirror the front camera output (so it matches the preview)
+            if photoOutputConnection.isVideoMirroringSupported == true 
+                && videoDeviceInput.device.position == .front
+                && self.settings.mirrorFrontCameraResult == true {
+                photoOutputConnection.automaticallyAdjustsVideoMirroring = false
+                if videoDeviceInput.device.position == .front {
+                    photoOutputConnection.isVideoMirrored = true
+                }
             }
+            
         }
             
-
         do {
             try self.videoDeviceInput.device.lockForConfiguration()
             if self.videoDeviceInput.device.isTorchModeSupported(.on) && self.torchMode == .on {
