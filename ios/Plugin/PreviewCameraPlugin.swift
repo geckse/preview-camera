@@ -280,8 +280,8 @@ public class PreviewCameraPlugin: CAPPlugin {
             settings.shouldResize = true
         }
         settings.shouldCorrectOrientation = call.getBool("correctOrientation", true),
-        settings.forcePortraitOrientation = call.getBool("forcePortraitOrientation", false),
-        settings.mirrorFrontCameraResult = call.getBool("mirrorFrontCameraResult", false)
+        settings.forcePortraitOrientation = call.getBool("forcePortraitOrientation", true),
+        settings.mirrorFrontCameraResult = call.getBool("mirrorFrontCameraResult", true)
         return settings
     }
     

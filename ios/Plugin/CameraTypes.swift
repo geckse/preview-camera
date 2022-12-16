@@ -43,8 +43,8 @@ public struct CameraSettings {
     var height: CGFloat = 0
     var shouldResize = false
     var shouldCorrectOrientation = true
-    var forcePortraitOrientation = false
-    var mirrorFrontCameraResult = false
+    var forcePortraitOrientation = true
+    var mirrorFrontCameraResult = true
     var presentationStyle = UIModalPresentationStyle.fullScreen
 }
 
