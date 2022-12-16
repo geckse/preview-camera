@@ -144,6 +144,11 @@ class PreviewCameraFragment : Fragment() {
         super.onCreate(savedInstanceState)
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
 
+        // mirror the front camera
+        val metadata = ImageCapture.Metadata();
+        if(lensFacing == CameraSelector.LENS_FACING_FRONT) metadata.apply { isReversedHorizontal = true }
+
+
         arguments?.let {
             cameraId = it.getString(ARG_PARAM1)
             pixelFormat = it.getInt(ARG_PARAM2)
