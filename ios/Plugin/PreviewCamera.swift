@@ -91,7 +91,18 @@ enum CaptureQuality {
         if let photoOutputConnection = photoOutput.connection(with: .video){
             photoOutputConnection.videoOrientation = videoOrientation()
         }
-        
+
+        // mirror the front camera output (so it matches the preview)
+        if photoOutputConnection.isVideoMirroringSupported == true 
+            && videoDeviceInput.device.position == .front
+            && self.settings.mirrorFrontCameraResult == true {
+            photoOutputConnection.automaticallyAdjustsVideoMirroring = false
+            if videoDeviceInput.device.position == .front {
+                photoOutputConnection.isVideoMirrored = true
+            }
+        }
+            
+
         do {
             try self.videoDeviceInput.device.lockForConfiguration()
             if self.videoDeviceInput.device.isTorchModeSupported(.on) && self.torchMode == .on {
@@ -155,6 +166,14 @@ enum CaptureQuality {
         let movieFileOutputConnection = movieFileOutput.connection(with: .video)
         movieFileOutputConnection?.videoOrientation = self.videoOrientation()
         
+        // mirror the front camera output (so it matches the preview)
+        if movieFileOutputConnection?.isVideoMirroringSupported == true
+         && videoDeviceInput.device.position == .front
+         && self.settings.mirrorFrontCameraResult == true {
+            movieFileOutputConnection?.automaticallyAdjustsVideoMirroring = false
+            movieFileOutputConnection?.isVideoMirrored = true
+        }
+
         session.startRunning()
         
         let filePath = createFile(FILENAME_FORMAT, VIDEO_EXTENSION)
@@ -654,6 +673,11 @@ enum CaptureQuality {
                 videoOrientation = .portrait
             }
             
+            // force the portrait orientation option
+            if self.settings.forcePortraitOrientation == true {
+                videoOrientation = .portrait
+            }
+
             return videoOrientation
         }
     
