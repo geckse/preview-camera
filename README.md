@@ -1,3 +1,12 @@
+## changes on this fork:
+
+- force portrait orientation
+- mirror the result / preview of front camera (so the recording is the same orientation as the preview)
+
+That matched more my use case, would be cleaner to add properly options so this behaviour can be controlled via capacitor
+
+------
+
 # @numbersprotocol/preview-camera
 
 Preview Camera Plugin for iOS, Android
